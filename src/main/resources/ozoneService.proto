@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ozoneService";
+option java_outer_classname = "ozoneServiceImpl";
+
+package ozoneService;
+
+// Interface exported by the server.
+service ozoneService {
+  // server
+  rpc ozoneTrack(requestLocalArea) returns (stream responseByArea) {}
+}
+
+message requestLocalArea {
+  string country = 1; // setCountry(), getCountry()
+  string city = 2;    // setCity(), getCity()
+}
+
+message responseByArea {
+  string city = 1; // setCity(), getCity()
+  int32 index = 2; // setIndex(), getIndex()
+  string band = 3; // setBand(), getBand()
+  string advice = 4; // setAdvice(), getAdvice()
+}
+

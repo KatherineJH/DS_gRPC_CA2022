@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "waterService";
+option java_multiple_files = true;
+option java_outer_classname = "waterServiceImpl";
+
+service waterService{
+	// bidirectional
+	rpc CreateSample (stream SampleRequest) returns (stream SampleResponse) {}
+}
+
+// the request message
+message SampleRequest {
+	string id = 1;
+	string name = 2;
+	string location = 3;
+}
+
+// the response message
+message SampleResponse {
+	string water_sample = 1;
+	bool success = 2;
+}

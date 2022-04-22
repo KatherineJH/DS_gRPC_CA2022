@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "pm_Service";
+option java_outer_classname = "pm_ServiceImpl";
+
+package pm_Service;
+
+// Interface exported by the server.
+service pm_Service {
+  // unary
+  rpc pmQualityTrack(Empty) returns (PMatter) {}
+  // unary
+  rpc pmOnOff(Requestpms) returns (Responsepms) {}
+  // client
+  rpc pmDensity(stream DensityRequest) returns (DensityResponse) {}
+}
+
+message Empty{
+
+}
+
+message PMatter{
+	string pmID = 1;
+	string status = 2;
+	int32 density = 3;
+}
+
+message Requestpms{
+	bool switch = 1;
+}
+
+message Responsepms{
+	bool switch = 1;
+}
+
+message DensityRequest{
+	int32 density = 1;
+}
+
+message DensityResponse{
+	int32 density = 1;
+}
+
+
