@@ -11,8 +11,8 @@ public class Data_pm {
 	public Data_pm() {
 		this.type = "Particular Matter";
 		this.on = true;
-		this.typeId = "PM ID";
-		this.density = 3;
+		this.typeId = "PM123";
+		this.density = 5;
 	}
 
 	//Setters and getters

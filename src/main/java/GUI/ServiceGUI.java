@@ -77,8 +77,6 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 public class ServiceGUI implements ActionListener{
-
-	private JFrame frame;
 	
 	private static int ozonePort = 50051;
 	private static int pmPort = 50052;
@@ -87,9 +85,6 @@ public class ServiceGUI implements ActionListener{
 	public JLabel pmsDataId;
 	public JLabel pmsDataStatus;
 	public JLabel pmsDataIntensity;
-
-	public static JSpinner HTemp;
-	public static  JTextField messages;
 	
 	private JTextField entry1, reply1;
 	private JTextField entry2, reply2;
@@ -292,7 +287,6 @@ public class ServiceGUI implements ActionListener{
 
 				@Override
 				public void onNext(DensityResponse dense) {				
-					// reply3.setText(value.getWaterSample() + "\n The water sample is drinkable.");
 					reply2.setText("\n The density of PM in air is " + dense.getDensity());
 					System.out.println("Purifier sensor has been aware of PM level " + dense.getDensity());
 				}
@@ -349,10 +343,9 @@ public class ServiceGUI implements ActionListener{
 				
 				@Override
 				public void onNext(SampleResponse value) {
-//					reply3.setText("Water Sample is " + value.getWaterSample());
-					reply3.setText(value.getWaterSample());
+					reply3.setText("Water Sample is " + value.getWaterSample());
 					String result = value.getWaterSample();
-					System.out.println(result + " -> drinkable.");
+					System.out.println(result + " is drinkable.");
 
 					
 					// response

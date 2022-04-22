@@ -56,7 +56,7 @@ public class Service1_Client {
 		
 		// method 1.				
 		int a = JOptionPane.showConfirmDialog(f,
-				"Welcome to Ozone Service\n\nDo you want to send request to Ozone Server");
+				"Welcome to Ozone Service\n\n Do you want to send request to Ozone Server");
 		if (a != JOptionPane.YES_OPTION) {
 			return;
 		}

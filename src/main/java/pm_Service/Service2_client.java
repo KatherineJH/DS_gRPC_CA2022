@@ -51,7 +51,7 @@ public class Service2_client {
 		pmQualityTrack();
 		pmOnOff();
 		pmDensity();
-		
+				
 		System.out.println("Shutting down channel");
 		channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 	}
@@ -59,13 +59,15 @@ public class Service2_client {
 	// pm
 	public static void pmQualityTrack() {
 		
+		// request
 		Empty emp = Empty.newBuilder().build();
+		// reponse
 		PMatter response;
 		
 		try {
 			//gathering pms information
 			response = bStub.pmQualityTrack(emp);
-			System.out.println("pm ID: " + response.getPmID());
+			System.out.println("The app is sensoring: " + response.getPmID());
 			System.out.println("PM status: " + response.getStatus());
 			System.out.println("Density: " + response.getDensity());				
 		}catch(StatusRuntimeException e) {
@@ -111,7 +113,7 @@ public class Service2_client {
 		StreamObserver<DensityRequest> requestObserver = asyncStub.pmDensity(responseObserver);
 		try {
 			//simulating several requests from client to change temperature
-			System.out.println("Density is 5.");
+			// set density 5 -> 4 -> 3-> 2 -> 1 manually.
 			requestObserver.onNext(DensityRequest.newBuilder().setDensity(5).build());
 			System.out.println("PM in air changed to: 4");
 			requestObserver.onNext(DensityRequest.newBuilder().setDensity(4).build());

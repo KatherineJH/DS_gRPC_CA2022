@@ -7,6 +7,8 @@ import java.net.UnknownHostException;
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
 import jmDNS.SimpleServiceRegistration;
+import pm_Service.Requestpms;
+import pm_Service.Responsepms;
 import jmDNS.SimpleServiceDiscovery;
 
 import waterService.SampleRequest;
@@ -46,15 +48,14 @@ public class Service3_server extends waterServiceImplBase{
 	}
 	
 	@Override
-	public StreamObserver<SampleRequest> createSample(StreamObserver<SampleResponse> responseObserver) {
-			
+	public StreamObserver<SampleRequest> createSample(StreamObserver<SampleResponse> responseObserver) {	
 		   StreamObserver<SampleRequest> requestObserver = new StreamObserver<SampleRequest>() {
 
 			@Override
 			// every time sample request is received 
 			public void onNext(SampleRequest value) {
-				
-				String result = "Water Sample is: " + value.getId();
+				// store water sample input by user in the variable 'result'
+				String result = value.getId();
 				
 				// response
 				SampleResponse sampleResponse = SampleResponse.newBuilder().setWaterSample(result).build();

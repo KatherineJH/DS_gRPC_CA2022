@@ -28,6 +28,7 @@ public class Service1_server extends ozoneServiceImplBase{
     public static void main(String[] args) throws IOException, InterruptedException {
 		// Server instance is created on port 50051. This is the port we want the server 
 		// to bind to and where it will listen to incoming messages.
+    	
     	// get a reference to the server
     	Service1_server service1 = new Service1_server();	
     	System.out.println("Starting gRPC ozone service server.");
@@ -41,8 +42,7 @@ public class Service1_server extends ozoneServiceImplBase{
 		SimpleServiceRegistration ssr = new SimpleServiceRegistration();
 		ssr.run(port, service_type, service_name);
 		
-		try {
-			// get a reference to the server		
+		try {		
 			Server server = ServerBuilder.forPort(port)
 					.addService(service1)
 					.build()

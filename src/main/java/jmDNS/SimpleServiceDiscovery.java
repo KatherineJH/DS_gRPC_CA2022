@@ -30,7 +30,7 @@ public class SimpleServiceDiscovery {
 		}
 		
 		public void serviceResolved(ServiceEvent event) {
-			System.out.println("Service Resolved "+ event.getInfo());
+//			System.out.println("Service Resolved "+ event.getInfo());
 			ServiceInfo serviceInfo = event.getInfo();
 			this.setServiceInfo(serviceInfo);
 			System.out.println("host " + serviceInfo.getHostAddress());

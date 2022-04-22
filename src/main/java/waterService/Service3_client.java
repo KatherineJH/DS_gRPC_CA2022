@@ -34,7 +34,6 @@ public class Service3_client {
 		serviceInfo = SimpleServiceDiscovery.run(service_type);
 
 		int port = 50053;
-//		int port = serviceInfo.getPort();
 		String host = "localhost";
 		
 		// build a channel
@@ -54,8 +53,10 @@ public class Service3_client {
 		// create an asynchronous client
 		waterServiceGrpc.waterServiceStub asyncClient = waterServiceGrpc.newStub(channel);
 
+		// Latch to make thread wait for ready
 		CountDownLatch latch = new CountDownLatch(1);
 
+		// response part
 		StreamObserver<SampleRequest> requestObserver = asyncClient.createSample(new StreamObserver<SampleResponse>() {
 
 			@Override
@@ -76,33 +77,34 @@ public class Service3_client {
 			}
 		});
 
-		// generate a few requests
-		// send 3 messages to the server using lambda function
-		// we expect 3 messages back
-		// onNext called many times
+		// generate a few requests.
+		// send 5 messages to the server and we can expect 5 messages back.
+		// can use onNext calls as many as times I want.
 
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter sample id to retrieve: ");
+		System.out.println("Enter water sample to retrieve: ");
 	
 		String sampleId = "";
 		boolean valid = false;
 		List<String> sampleList = new ArrayList<>();
 		for (int i = 0; i < 5; ++i) {
 			do {
-				System.out.println("Enter sample id: ");
+				System.out.println("Enter water sample: ");
 				if (sc.hasNext("[a-zA-Z0-9]+")) {
 					sampleId = sc.nextLine();
 					valid = true;
 				} else {
 					sc.nextLine();
-					System.out.println("Please enter a valid sample id");
+					System.out.println("Please enter a valid water sample.");
 				}
 
 			} while (!valid);
 			sampleList.add(sampleId);
 		}
-
+		
+		// request part
+		// print out requests(inputs)using lambda
 		sampleList.forEach(id -> {
 			System.out.println("Sending: " + id);
 			requestObserver.onNext(SampleRequest.newBuilder().setId(id).build());

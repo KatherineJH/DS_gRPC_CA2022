@@ -46,6 +46,7 @@ public class Service2_server extends pm_ServiceImplBase{
 		}
 	}
 
+	// on and off for status
 	@Override
 	public void pmQualityTrack(Empty request, StreamObserver<PMatter> responseObserver) {
 		String status;
@@ -68,12 +69,12 @@ public class Service2_server extends pm_ServiceImplBase{
 		responseObserver.onCompleted();		
 	}
 	
-	// on and off
+	// on and off for the air purifier
 	@Override
 	public void pmOnOff(Requestpms request, StreamObserver<Responsepms> responseObserver) {
 		//notification of method invocation
 		System.out.println("Receiving request to turn On/Off purifier");
-		//if true, devices off otherwise, on
+		//if true, the air purifier off otherwise, on
 		Boolean OnOff = request.getSwitch();
 		if (OnOff) {
         	System.out.println("Setting purifier off!");
@@ -97,8 +98,7 @@ public class Service2_server extends pm_ServiceImplBase{
 			public void onNext(DensityRequest value) {
 				//variable set to the user input
 				density = value.getDensity();
-				System.out.println("PMs density changed: " + density);
-				
+				System.out.println("PMs density changed: " + density);				
 			}
 
 			public void onError(Throwable t) {
